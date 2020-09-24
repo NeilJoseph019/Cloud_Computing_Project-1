@@ -1,0 +1,90 @@
+{% extends "Home.html" %}
+{% block content %}
+        <div class="content">
+          <h2 style="text-align: center;"> {{button_action}}</h2>
+
+            <form action="/AddDevice.html" method="post" style="text-align: center;">
+                <div >
+                    <div class="left">
+                        Device Name:
+                    </div>
+                    <div class="right">
+                        <input name="GPU_name" type="text" value= {{entered_device.GPU_name}}> <br />
+                    </div>
+                </div>
+
+                <div>
+                    <div class="left">
+                        Manufacture Name:
+                    </div>
+                    <div class="right">
+                        <input name="manufacturer_name" type="text" value="{{entered_device.manufacturer_name}}"/> <br />
+                    </div>
+                </div>
+
+                <div>
+                    <div class="left">
+                        Date Issued:
+                    </div>
+                    <div class="right">
+                        <input name="date" type="date" value="{{entered_device.date}}"/> <br />
+                    </div>
+                </div>
+
+                <input type="hidden" value="{{device_name}}" name="device_name"/>
+
+                <br /><h3>Features :</h3>
+
+                {% if entered_device.geometry_Shader %}
+                <input name="checkbox_geometry_shader" type="checkbox" checked/>
+                {% else %}
+                <input name="checkbox_geometry_shader" type="checkbox" />
+                {% endif %}
+                Geometry Shader <br />
+
+                {% if entered_device.tesselation_Shader %}
+                <input name="checkbox_tesselation_shader" type="checkbox" checked/>
+                {% else %}
+                <input name="checkbox_tesselation_shader" type="checkbox" />
+                {% endif %}
+                Tesselation Shader <br />
+
+                {% if entered_device.shader_Int %}
+                <input name="checkbox_shader_int" type="checkbox" checked/>
+                {% else %}
+                <input name="checkbox_shader_int" type="checkbox" />
+                {% endif %}
+                ShaderInt16 <br />
+
+                {% if entered_device.sparse_Binding %}
+                <input name="checkbox_sparse_blinding" type="checkbox" checked/>
+                {% else %}
+                <input name="checkbox_sparse_blinding" type="checkbox" />
+                {% endif %}
+                Sparse Binding <br />
+
+                {% if entered_device.texture_Compression %}
+                <input name="checkbox_textureC" type="checkbox" checked/>
+                {% else %}
+                <input name="checkbox_textureC" type="checkbox" />
+                {% endif %}
+                TextureCompression ETC2 <br />
+
+                {% if entered_device.vertex_Pipeline %}
+                <input name="checkbox_vertexP" type="checkbox" checked/>
+                {% else %}
+                <input name="checkbox_vertexP" type="checkbox" />
+                {% endif %}
+                Vertex Pipeline Stores And Atomics <br /><br />
+
+                <input type="submit" value="Cancel" name="cancel" />
+                <input type="submit" value="{{button_action}}" name="add_Device" />
+
+            </form>
+
+            <br>
+               <button  style="height:30px; width:100px"  onclick="location.href='/Login.html'" type="button">
+                             Back
+               </button>
+        </div>
+{% endblock %}

@@ -1,0 +1,114 @@
+{% extends "Home.html" %}
+{% block content %}
+        <div class="content">
+          <h2> GPU Comparision Listing</h2>
+
+            <table align="center" >
+
+
+                 <tr>
+                     <th colspan="6"><strong>Comparsion</strong></th>
+                 </tr>
+
+                        <tr>
+                            <td><strong>Driver Name</strong></td>
+                            {% for driver in gpu %}
+                                <td>{{ driver.GPU_name }}</td>
+                            {% endfor %}
+                        </tr>
+
+                         <tr>
+                            <td><strong>Manufracturer Name</strong></td>
+                            {% for driver in gpu %}
+                                <td>{{ driver.manufacturer_name }}</td>
+                            {% endfor %}
+                        </tr>
+
+                        <tr>
+                            <td><strong>Date</strong></td>
+                            {% for driver in gpu %}
+                                <td>{{ driver.date }}</td>
+                            {% endfor %}
+                        </tr>
+
+                        <tr>
+                            <td><strong>  Features </strong></td>
+                            <td> </td>
+                         </tr>
+
+                        <tr>
+                            <td><strong>Geometry Shader</strong></td>
+                            {% for driver in gpu %}
+                                {% if driver.geometry_Shader %}
+                                    <td><input name="" type="checkbox" checked disabled/></td>
+                                {% else %}
+                                    <td><input name="" type="checkbox" disabled/></td>
+                                {% endif %}
+                            {% endfor %}
+                        </tr>
+
+                        <tr>
+                            <td><strong>Tesselation Shader</strong></td>
+                            {% for driver in gpu %}
+                                {% if driver.tesselation_Shader %}
+                                    <td><input name="" type="checkbox" checked disabled/></td>
+                                {% else %}
+                                    <td><input name="" type="checkbox" disabled/></td>
+                                {% endif %}
+                            {% endfor %}
+                        </tr>
+
+                        <tr>
+                            <td><strong>ShaderInt16</strong></td>
+                            {% for driver in gpu %}
+                                {% if driver.shader_Int %}
+                                    <td><input name="" type="checkbox" checked disabled/></td>
+                                {% else %}
+                                    <td><input name="" type="checkbox" disabled/></td>
+                                {% endif %}
+                            {% endfor %}
+                        </tr>
+
+                        <tr>
+                            <td><strong>Sparse Binding</strong></td>
+                            {% for driver in gpu %}
+                                {% if driver.sparse_Binding %}
+                                    <td><input name="" type="checkbox" checked disabled/></td>
+                                {% else %}
+                                    <td><input name="" type="checkbox" disabled/></td>
+                                {% endif %}
+                            {% endfor %}
+                        </tr>
+
+                        <tr>
+                            <td><strong>TextureCompression ETC2</strong></td>
+                            {% for driver in gpu %}
+                                {% if driver.texture_Compression %}
+                                    <td><input name="" type="checkbox" checked disabled/></td>
+                                {% else %}
+                                    <td><input name="" type="checkbox" disabled/></td>
+                                {% endif %}
+                            {% endfor %}
+                        </tr>
+
+                        <tr>
+                            <td><strong>Vertex Pipeline Stores And Atomics</strong></td>
+                            {% for driver in gpu %}
+                                {% if driver.vertex_Pipeline %}
+                                    <td><input name="" type="checkbox" checked disabled/></td>
+                                {% else %}
+                                    <td><input name="" type="checkbox" disabled/></td>
+                                {% endif %}
+                            {% endfor %}
+                        </tr>
+
+
+            </table>
+
+            <br>
+              <button  style="height:30px; width:100px"  onclick="location.href='/'" type="button">
+                             Back
+               </button>
+
+        </div>
+{% endblock %}

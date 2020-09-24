@@ -1,0 +1,198 @@
+<html lang="en">
+    <head>
+        <title>{{ title }}</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <style>
+            {
+              box-sizing: border-box;
+              font-family: Arial, Helvetica, sans-serif;
+            }
+
+            body {
+              margin: 0;
+              font-family: Arial, Helvetica, sans-serif;
+            }
+
+            /* Style the top navigation bar */
+            .topnav {
+              overflow: hidden;
+              background-color: #333;
+            }
+
+            /* Style the topnav links */
+            .topnav a {
+              float: left;
+              display: block;
+              color: #f2f2f2;
+              text-align: center;
+              padding: 14px 16px;
+              text-decoration: none;
+            }
+
+            /* Change color on hover */
+            .topnav a:hover {
+              background-color: #ddd;
+              color: black;
+            }
+
+            /* Style the content */
+            .content {
+              background-color: #ddd;
+              padding: 10px;
+              height: 520px;
+            }
+
+            /* Style the footer */
+            .footer {
+              background-color: #f1f1f1;
+              padding: 10px;
+              position: fixed;
+              left: 0;
+              bottom: 0;
+              width: 100%;
+            }
+
+            table {
+                  background-color: white;
+                  style=text-align: center,overflow-y:auto;
+                  font-family: arial, sans-serif;
+                  border-collapse: collapse;
+                  width: 80%;
+                }
+
+            td, th {
+              background-color: white;
+              style=text-align: center;
+              border: 1px solid #000000;
+              text-align: left;
+              padding: 8px;
+            }
+
+            tr:nth-child(even) {
+              background-color: #dddddd;
+            }
+        </style>
+    </head>
+    <body>
+
+        <div class="topnav">
+            <a href="/"> GPU info.com</a>
+            <a href="/">Home</a>
+            <a href="Login.html">Login</a>
+        </div>
+
+   {% block content %}
+
+        <div class="content" style="overflow-y:auto;">
+          <h2> GPU Listing</h2>
+
+
+            <form method="Get">
+
+                    {% if checkbox_geometry_shader%}
+                            <input name="checkbox_geometry_shader" type="checkbox" checked/>
+                            {% else %}
+                            <input name="checkbox_geometry_shader" type="checkbox" />
+                    {% endif %}
+                            Geometry Shader
+                    <br/>
+
+                    {% if checkbox_tesselation_shader %}
+                            <input name="checkbox_tesselation_shader" type="checkbox" checked/>
+                            {% else %}
+                            <input name="checkbox_tesselation_shader" type="checkbox" >
+                    {% endif %}
+                            Tesselation Shader
+                     <br/>
+
+                    {% if checkbox_shader_int %}
+                            <input name="checkbox_shader_int" type="checkbox" checked />
+                            {% else %}
+                            <input name="checkbox_shader_int" type="checkbox" >
+                    {% endif %}
+                            ShaderInt16
+                    <br/>
+
+                    {% if checkbox_sparse_blinding %}
+                            <input name="checkbox_sparse_blinding" type="checkbox" checked/>
+                            {% else %}
+                            <input name="checkbox_sparse_blinding" type="checkbox" >
+                    {% endif %}
+                            Sparse Binding
+                    <br/>
+
+                    {% if checkbox_textureC %}
+                            <input name="checkbox_textureC" type="checkbox" checked/>
+                            {% else %}
+                            <input name="checkbox_textureC" type="checkbox" />
+                    {% endif %}
+                            Texture Compression ETC2
+                    <br/>
+
+                    {% if checkbox_vertexP %}
+                            <input name="checkbox_vertexP" type="checkbox" checked/>
+                            {% else %}
+                            <input name="checkbox_vertexP" type="checkbox" />
+                    {% endif %}
+                            Vertex Pipeline Stores And Atomics
+                    <br/>
+
+                    <br/>
+                        <input type="submit" value="Cancel" name="search_device" />
+                        <input type="submit" value="Search" name="search_device" />
+
+            </form>
+
+            </br>
+
+            <table align="center">
+                  <tr>
+                      <th class="tg-hmp3">GPU Name</th>
+                      <th class="tg-hmp3">Manufacturer</th>
+                      <th class="tg-hmp3">Date Issued</th>
+                      <th class="tg-hmp3">Compare </th>
+                  </tr>
+
+                {% if list_device|length > 0 %}
+
+                    {% for device in list_device %}
+                          <tr style="overflow-y:auto;">
+                                <td><a href="/Info.html?device_name={{ device.key.id() }}">{{ device.GPU_name }}</a></td>
+                                <td>{{ device.manufacturer_name }}</td>
+                                <td>{{ device.date }}</td>
+                                <td>
+                                     <form method="GET" action="/Compare">
+                                        <select name="selected_device">
+                                            <option name="">Select</option>
+                                            {% for select_device in list_device %}
+                                                {% if select_device.GPU_name != device.GPU_name %}
+                                                    <option value="{{select_device.GPU_name}}" >{{select_device.GPU_name}}</option>
+                                                {% endif %}
+                                            {% endfor %}
+                                            <input type="hidden" name="current_device" value="{{device.GPU_name}}" />
+                                            <input type="submit" value="compare"/>
+                                        </select>
+                                     </form>
+                                </td>
+                          </tr>
+
+                    {% endfor %}
+
+                {% else %}
+
+                            <tr>
+                               <th colspan="6">No Devices Found</th>
+                            </tr>
+                {% endif %}
+
+                </table>
+             </div>
+   {% endblock %}
+
+        <div class="footer">
+          <p>@Copyrights</p>
+        </div>
+
+    </body>
+</html>

@@ -1,0 +1,21 @@
+{% extends "Home.html" %}
+{% block content %}
+        <div class="content" style="text-align: center">
+          <h2 style="text-align: center"> Login</h2>
+
+            {% if user %}
+                <p >{{ welcome }} {{ user.email() }}
+                    <br>
+                    <br>
+
+                     <button  style="height:30px; width:100px"  onclick="location.href='/AddDevice.html'" type="button">
+                             Add Device
+                     </button>
+
+                </p>
+                {% else %}
+                <p>Hello guest welcome to the application. In-order to add or edit data you need to login. </p>
+            {% endif %}
+                <p>You can {{ url_string }} <a href='{{ url }}'>here</a></p>
+        </div>
+{% endblock %}

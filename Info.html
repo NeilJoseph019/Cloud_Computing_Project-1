@@ -1,0 +1,101 @@
+{% extends "Home.html" %}
+{% block content %}
+        <div class="content" style="text-align: center;">
+          <h2> GPU Information Listing</h2>
+
+            <form method="post">
+
+            {% for driver in list_drivers %}
+
+
+            <table align="center" >
+
+                 <tr>
+                    <th colspan="2">DEVICE INFORMATION</th>
+                 </tr>
+
+                <tr>
+                    <td><strong>Driver Name</strong></td>
+
+                        <td>{{ driver.GPU_name }}</td>
+
+                </tr>
+
+                 <tr>
+                    <td><strong>Manufracturer Name</strong></td>
+
+                        <td>{{ driver.manufacturer_name }}</td>
+
+                </tr>
+
+                <tr>
+                    <td><strong>Date</strong></td>
+
+                        <td>{{ driver.date }}</td>
+
+                </tr>
+
+                <tr>
+                   <th colspan="2">Features</th>
+                 </tr>
+
+                <tr>
+                     <td><strong>Geometry Shader</strong></td>
+
+                     <td>{{driver.geometry_Shader}}</td>
+                </tr>
+
+                <tr>
+                     <td><strong>Tesselation Shader </strong></td>
+
+                     <td>{{driver.tesselation_Shader}}</td>
+                </tr>
+
+                <tr>
+                     <td><strong>ShaderInt16 </strong></td>
+
+                     <td>{{driver.shader_Int}}</td>
+                </tr>
+
+                <tr>
+                    <td><strong>Sparse Binding </strong></td>
+
+                     <td>{{driver.sparse_Binding}}</td>
+                </tr>
+
+                <tr>
+                    <td><strong>TextureCompression ETC2</strong></td>
+
+                     <td>{{driver.texture_Compression}}</td>
+                </tr>
+
+                <tr>
+                    <td><strong>Vertex Pipeline Stores And Atomic</strong></td>
+
+                     <td>{{ driver.vertex_Pipeline}}</td>
+                </tr>
+
+            </table>
+
+            {% endfor %}
+
+
+               <br>
+              <button  style="height:30px; width:100px"  onclick="location.href='/'" type="button">
+                             Back
+               </button>
+
+            {% if user %}
+
+                {% for driver in list_drivers %}
+                        <a href="/AddDevice.html?device_name={{ driver.key.id() }}">
+                            <button  style="height:30px; width:100px" type="button">
+                                         Edit Device
+                            </button>
+                        </a>
+                {% endfor %}
+
+            {% endif %}
+            </form>
+        </div>
+{% endblock %}
